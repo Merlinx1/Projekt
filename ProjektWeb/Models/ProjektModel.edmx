@@ -1,0 +1,198 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="ProjektModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Krzesła">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Rodzaj_Krzeseł" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Ławki">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Rodzaj_ławek" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Sale">
+          <Key>
+            <PropertyRef Name="Nr_Sali" />
+          </Key>
+          <Property Name="Nr_Sali" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Rodzaj sali" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Ilość miejsc" Type="int" Nullable="false" />
+          <Property Name="Rodzaj_krzeseł" Type="int" Nullable="false" />
+          <Property Name="Rodzaj_ławek" Type="int" Nullable="false" />
+          <Property Name="Projektor" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_Sale_ToTable">
+          <End Role="Krzesła" Type="Self.Krzesła" Multiplicity="1" />
+          <End Role="Sale" Type="Self.Sale" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Krzesła">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Sale">
+              <PropertyRef Name="Rodzaj_krzeseł" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Sale_ToTable_1">
+          <End Role="Ławki" Type="Self.Ławki" Multiplicity="1" />
+          <End Role="Sale" Type="Self.Sale" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Ławki">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Sale">
+              <PropertyRef Name="Rodzaj_ławek" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="ProjektModelStoreContainer">
+          <EntitySet Name="Krzesła" EntityType="Self.Krzesła" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Ławki" EntityType="Self.Ławki" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Sale" EntityType="Self.Sale" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Sale_ToTable" Association="Self.FK_Sale_ToTable">
+            <End Role="Krzesła" EntitySet="Krzesła" />
+            <End Role="Sale" EntitySet="Sale" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Sale_ToTable_1" Association="Self.FK_Sale_ToTable_1">
+            <End Role="Ławki" EntitySet="Ławki" />
+            <End Role="Sale" EntitySet="Sale" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="ProjektModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Krzesła">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Rodzaj_Krzeseł" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Sale" Relationship="Self.FK_Sale_ToTable" FromRole="Krzesła" ToRole="Sale" />
+        </EntityType>
+        <EntityType Name="Ławki">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Rodzaj_ławek" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Sale" Relationship="Self.FK_Sale_ToTable_1" FromRole="Ławki" ToRole="Sale" />
+        </EntityType>
+        <EntityType Name="Sale">
+          <Key>
+            <PropertyRef Name="Nr_Sali" />
+          </Key>
+          <Property Name="Nr_Sali" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Rodzaj_sali" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Ilość_miejsc" Type="Int32" Nullable="false" />
+          <Property Name="Rodzaj_krzeseł" Type="Int32" Nullable="false" />
+          <Property Name="Rodzaj_ławek" Type="Int32" Nullable="false" />
+          <Property Name="Projektor" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Krzesła" Relationship="Self.FK_Sale_ToTable" FromRole="Sale" ToRole="Krzesła" />
+          <NavigationProperty Name="Ławki" Relationship="Self.FK_Sale_ToTable_1" FromRole="Sale" ToRole="Ławki" />
+        </EntityType>
+        <Association Name="FK_Sale_ToTable">
+          <End Role="Krzesła" Type="Self.Krzesła" Multiplicity="1" />
+          <End Role="Sale" Type="Self.Sale" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Krzesła">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Sale">
+              <PropertyRef Name="Rodzaj_krzeseł" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Sale_ToTable_1">
+          <End Role="Ławki" Type="Self.Ławki" Multiplicity="1" />
+          <End Role="Sale" Type="Self.Sale" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Ławki">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Sale">
+              <PropertyRef Name="Rodzaj_ławek" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="ProjektEntities1" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Krzesła" EntityType="Self.Krzesła" />
+          <EntitySet Name="Ławki" EntityType="Self.Ławki" />
+          <EntitySet Name="Sale" EntityType="Self.Sale" />
+          <AssociationSet Name="FK_Sale_ToTable" Association="Self.FK_Sale_ToTable">
+            <End Role="Krzesła" EntitySet="Krzesła" />
+            <End Role="Sale" EntitySet="Sale" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Sale_ToTable_1" Association="Self.FK_Sale_ToTable_1">
+            <End Role="Ławki" EntitySet="Ławki" />
+            <End Role="Sale" EntitySet="Sale" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="ProjektModelStoreContainer" CdmEntityContainer="ProjektEntities1">
+          <EntitySetMapping Name="Krzesła">
+            <EntityTypeMapping TypeName="ProjektModel.Krzesła">
+              <MappingFragment StoreEntitySet="Krzesła">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Rodzaj_Krzeseł" ColumnName="Rodzaj_Krzeseł" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Ławki">
+            <EntityTypeMapping TypeName="ProjektModel.Ławki">
+              <MappingFragment StoreEntitySet="Ławki">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Rodzaj_ławek" ColumnName="Rodzaj_ławek" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Sale">
+            <EntityTypeMapping TypeName="ProjektModel.Sale">
+              <MappingFragment StoreEntitySet="Sale">
+                <ScalarProperty Name="Nr_Sali" ColumnName="Nr_Sali" />
+                <ScalarProperty Name="Rodzaj_sali" ColumnName="Rodzaj sali" />
+                <ScalarProperty Name="Ilość_miejsc" ColumnName="Ilość miejsc" />
+                <ScalarProperty Name="Rodzaj_krzeseł" ColumnName="Rodzaj_krzeseł" />
+                <ScalarProperty Name="Rodzaj_ławek" ColumnName="Rodzaj_ławek" />
+                <ScalarProperty Name="Projektor" ColumnName="Projektor" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

@@ -1,0 +1,57 @@
+﻿@model IEnumerable<ProjektWeb.Models.Sale>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table table-bordered table-danger table-hover">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Rodzaj_sali)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Ilość_miejsc)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Projektor)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Krzesła.Rodzaj_Krzeseł)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Ławki.Rodzaj_ławek)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Rodzaj_sali)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Ilość_miejsc)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Projektor)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Krzesła.Rodzaj_Krzeseł)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Ławki.Rodzaj_ławek)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.Nr_Sali }) |
+            @Html.ActionLink("Details", "Details", new { id=item.Nr_Sali }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.Nr_Sali })
+        </td>
+    </tr>
+}
+
+</table>

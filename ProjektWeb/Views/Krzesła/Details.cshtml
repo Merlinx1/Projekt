@@ -1,0 +1,26 @@
+﻿@model ProjektWeb.Models.Krzesła
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Krzesła</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Rodzaj_Krzeseł)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Rodzaj_Krzeseł)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

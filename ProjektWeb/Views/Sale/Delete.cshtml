@@ -1,0 +1,64 @@
+﻿@model ProjektWeb.Models.Sale
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<h2>Delete</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>Sale</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Rodzaj_sali)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Rodzaj_sali)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Ilość_miejsc)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Ilość_miejsc)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Projektor)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Projektor)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Krzesła.Rodzaj_Krzeseł)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Krzesła.Rodzaj_Krzeseł)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Ławki.Rodzaj_ławek)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Ławki.Rodzaj_ławek)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-default" /> |
+            @Html.ActionLink("Back to List", "Index")
+        </div>
+    }
+</div>

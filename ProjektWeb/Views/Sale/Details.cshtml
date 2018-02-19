@@ -1,0 +1,58 @@
+﻿@model ProjektWeb.Models.Sale
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Sale</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Rodzaj_sali)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Rodzaj_sali)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Ilość_miejsc)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Ilość_miejsc)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Projektor)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Projektor)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Krzesła.Rodzaj_Krzeseł)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Krzesła.Rodzaj_Krzeseł)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Ławki.Rodzaj_ławek)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Ławki.Rodzaj_ławek)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Nr_Sali }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
